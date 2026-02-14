@@ -3,248 +3,493 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You 💖</title>
+    <title>💗 For Your Eyes Only 💗</title>
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;600&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; /* Fun font */
-            background: linear-gradient(135deg, #fbc2c2, #f8e0b0); /* Soft pink to peach */
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden; /* Prevents scrollbars from confetti */
-            position: relative;
+            box-sizing: border-box;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            padding: 2rem 3rem;
-            border-radius: 50px 20px 50px 20px; /* Wacky border */
-            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
-            border: 5px solid white;
-            max-width: 600px;
-            margin: 20px;
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #1a0f0f, #2d1a1a, #4a2b2b);
+            min-height: 100vh;
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Romantic Background */
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: rgba(255, 107, 107, 0.6);
+            font-size: 1.5rem;
+            animation: floatUp 8s linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .glow {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .content {
+            position: relative;
             z-index: 10;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header-section {
+            margin-bottom: 50px;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
-            font-size: 3rem;
-            color: #d43f3f;
-            text-shadow: 3px 3px 0 #ffe082;
-            margin-bottom: 0.5rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: #ffd7d7;
+            text-shadow: 0 0 20px #ff6b6b, 0 0 40px #ff6b6b, 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: glowPulse 3s ease-in-out infinite;
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: #6a4e4e;
-            margin-bottom: 2rem;
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 20px #ff6b6b, 0 0 40px #ff6b6b; }
+            50% { text-shadow: 0 0 30px #ff8787, 0 0 60px #ff8787, 0 0 80px #ff8787; }
         }
 
-        .photo-frame {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 20px auto;
-            border: 8px solid white;
-            border-radius: 50%; /* Circle frame */
+        .sub-header {
+            font-size: 2rem;
+            color: #ffe6e6;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 60px 0;
+            animation: fadeIn 2s ease 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .gallery-item {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background-color: #ffe0e0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 0 4px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
         }
 
-        .photo-frame img {
+        .gallery-item:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 25px 40px rgba(0,0,0,0.5), 0 0 0 6px #ffd7d7;
+            z-index: 20;
+        }
+
+        .gallery-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Makes the image fit the circle */
+            object-fit: cover;
+            transition: all 0.4s ease;
         }
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 30px 0 20px;
-            flex-wrap: wrap;
+        .gallery-item:hover img {
+            transform: scale(1.2);
         }
 
-        .btn {
-            font-size: 2rem;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px; /* Pill shape */
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 0 #bb8f8f;
-            border: 2px solid white;
+        /* Love Letter Section */
+        .love-letter {
+            background: rgba(255, 240, 240, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 50px;
+            margin: 60px 0;
+            border: 2px solid rgba(255, 215, 215, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 50px rgba(255, 107, 107, 0.3);
+            animation: slideIn 1.5s ease 1s both;
         }
 
-        .btn-yes {
-            background-color: #ff6f6f;
-            color: white;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .btn-yes:hover {
-            background-color: #ff5252;
-            transform: scale(1.1);
-            box-shadow: 0 8px 0 #a15b5b;
+        .love-letter h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #ffb6b6;
+            margin-bottom: 30px;
         }
 
-        .btn-no {
-            background-color: #a8a8a8;
-            color: white;
-            position: relative; /* Important for the moving button */
+        .letter-content {
+            font-size: 1.3rem;
+            line-height: 2;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #fff0f0;
         }
 
-        /* The Surprise Message (hidden initially) */
-        .surprise-message {
-            display: none;
+        .letter-content p {
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .letter-content p:nth-child(1) { animation-delay: 1.5s; }
+        .letter-content p:nth-child(2) { animation-delay: 2s; }
+        .letter-content p:nth-child(3) { animation-delay: 2.5s; }
+        .letter-content p:nth-child(4) { animation-delay: 3s; }
+        .letter-content p:nth-child(5) { animation-delay: 3.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
             font-size: 2.5rem;
-            color: #b34141;
-            animation: pop 0.5s ease;
-            margin-top: 20px;
+            color: #ffb6b6;
+            text-align: right;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease 4s forwards;
         }
 
-        @keyframes pop {
-            0% { transform: scale(0); }
-            80% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        /* Reasons Section */
+        .reasons-section {
+            margin: 80px 0;
         }
 
-        /* Simple confetti pieces */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f0f;
-            opacity: 0.7;
-            top: -10px;
-            border-radius: 50%;
-            z-index: 5;
+        .reasons-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ffd7d7;
+            margin-bottom: 40px;
         }
 
-        footer {
-            margin-top: 20px;
-            color: #6b4f4f;
-            font-size: 1rem;
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 215, 0.2);
+            border-radius: 30px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        .reason-card:nth-child(2) { animation-delay: 0.2s; }
+        .reason-card:nth-child(3) { animation-delay: 0.4s; }
+        .reason-card:nth-child(4) { animation-delay: 0.6s; }
+        .reason-card:nth-child(5) { animation-delay: 0.8s; }
+        .reason-card:nth-child(6) { animation-delay: 1s; }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .reason-card:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 20px 30px rgba(255, 107, 107, 0.3);
+            border-color: #ffb6b6;
+        }
+
+        .reason-card .emoji {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .reason-card p {
+            font-size: 1.2rem;
+            color: #ffe6e6;
+        }
+
+        /* Music Player */
+        .music-player {
+            margin: 50px 0;
+            padding: 20px;
+        }
+
+        .music-note {
+            font-size: 2rem;
+            animation: bounce 2s ease infinite;
+            cursor: pointer;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 60px;
+            border: 2px solid rgba(255, 215, 215, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-note:hover {
+            background: rgba(255, 107, 107, 0.3);
+            transform: scale(1.1);
+            border-color: #ffb6b6;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Footer */
+        .closing-note {
+            margin: 80px 0 40px;
+            font-size: 2.5rem;
+            font-family: 'Dancing Script', cursive;
+            color: #ffd7d7;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        /* Background Music Warning */
+        .music-warning {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
+    <!-- Floating Hearts Background -->
+    <div class="floating-hearts" id="heartContainer"></div>
+    <div class="glow"></div>
 
-    <div class="container">
-        <h1>💘 Hey Cutie! 💘</h1>
-        <p class="subtitle">(Yeah, you. The one reading this.)</p>
+    <!-- Hidden Audio Element (Auto-plays when page loads) -->
+    <audio id="bgMusic" loop>
+        <!-- OPTION 1: YouTube Audio (via third party - most reliable) -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <!-- OPTION 2: Replace with your own romantic song -->
+        <!-- Use a song from a free music site like Pixabay or upload to your server -->
+        Your browser does not support the audio element.
+    </audio>
 
-        <!-- Photo of you two! Replace the image link below -->
-        <div class="photo-frame">
-            <!-- IMPORTANT: REPLACE THIS WITH YOUR PHOTO URL -->
-            <img src="https://via.placeholder.com/400x400/ffb6c1/ff69b4?text=Us+%3C3" alt="A cute couple placeholder - replace me!">
-            <!-- Hint: Upload a photo to imgur.com and paste the link here -->
+    <div class="content">
+        <!-- Header -->
+        <div class="header-section">
+            <h1>My Dearest [Her Name]</h1>
+            <div class="sub-header">💕 You said YES! 💕</div>
         </div>
 
-        <p style="font-size: 1.5rem; margin: 20px 0;">I have a very important question...</p>
-
-        <div class="button-container">
-            <button class="btn btn-yes" id="yesBtn">Yes 💖</button>
-            <button class="btn btn-no" id="noBtn">No 🙅‍♀️</button>
+        <!-- Photo Gallery (Replace with your photos) -->
+        <div class="gallery">
+            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/ffb6c1/ffffff?text=Photo+1" alt="Memory 1"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/ffb3ba/ffffff?text=Photo+2" alt="Memory 2"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/ffd1b3/ffffff?text=Photo+3" alt="Memory 3"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/b3ffb3/ffffff?text=Photo+4" alt="Memory 4"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/400x400/b3b3ff/ffffff?text=Photo+5" alt="Memory 5"></div>
         </div>
 
-        <div id="surpriseMessage" class="surprise-message">
-            🎉 YAY! I knew it! 🎉 <br>
-            <span style="font-size: 1.5rem;">(You just made my whole day!)</span>
+        <!-- Love Letter -->
+        <div class="love-letter">
+            <h2>💌 A Letter From My Heart 💌</h2>
+            <div class="letter-content">
+                <p>My love,</p>
+                
+                <p>From the moment I saw you, something changed in me. The world seemed brighter, colors seemed more vivid, and my heart found a rhythm it never knew existed. Every smile you've given me, every laugh we've shared, every moment we've spent together — they're all treasures I hold deep in my soul.</p>
+                
+                <p>You have this incredible way of making ordinary moments feel magical. A simple text from you can turn my worst day into the best one. Your laughter is my favorite sound, your happiness my greatest priority, and your presence the greatest gift I could ever ask for.</p>
+                
+                <p>I love the way your eyes light up when you talk about things you're passionate about. I love the little quirks that make you uniquely you — the way you [insert something specific about her, like: bite your lip when you're thinking, or how you always order the same thing at restaurants]. I love that you're not just beautiful, but kind, intelligent, and strong.</p>
+                
+                <p>Today, on Valentine's Day, I wanted to create something that shows you even a fraction of how much you mean to me. Every line of code, every animation, every word you're reading right now was written with you in mind. You inspire me to be creative, to be romantic, to be the best version of myself.</p>
+                
+                <p>So here's my question to you... not just for today, but for always: Will you let me continue making you smile? Will you let me be the one who stands by your side, who supports your dreams, who wipes away your tears, and who celebrates every victory with you?</p>
+                
+                <p>I'm falling for you, [Her Name]. And I don't ever want to stop.</p>
+            </div>
+            <div class="signature">
+                Forever yours,<br>
+                [Your Name] ❤️
+            </div>
         </div>
 
-        <footer>made with ❤️ (and a little bit of mischief) just for you</footer>
+        <!-- Reasons Why I Love You -->
+        <div class="reasons-section">
+            <h2 class="reasons-title">100 Reasons Why You're Amazing</h2>
+            <div class="reasons-grid">
+                <div class="reason-card"><span class="emoji">💫</span><p>Your smile lights up my world</p></div>
+                <div class="reason-card"><span class="emoji">🎵</span><p>Your laugh is my favorite song</p></div>
+                <div class="reason-card"><span class="emoji">🌟</span><p>The way your eyes sparkle</p></div>
+                <div class="reason-card"><span class="emoji">🤗</span><p>Your hugs feel like home</p></div>
+                <div class="reason-card"><span class="emoji">💭</span><p>You understand me without words</p></div>
+                <div class="reason-card"><span class="emoji">🌹</span><p>You're more beautiful every day</p></div>
+                <div class="reason-card"><span class="emoji">🧠</span><p>Your intelligence inspires me</p></div>
+                <div class="reason-card"><span class="emoji">💪</span><p>Your strength amazes me</p></div>
+                <div class="reason-card"><span class="emoji">🎨</span><p>You see beauty in everything</p></div>
+                <div class="reason-card"><span class="emoji">🎭</span><p>You're never afraid to be yourself</p></div>
+                <div class="reason-card"><span class="emoji">🌺</span><p>Your kindness to everyone</p></div>
+                <div class="reason-card"><span class="emoji">🎪</span><p>You make everything more fun</p></div>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.3rem; color: #ffb6b6;">...and 88 more reasons I'll spend forever showing you 💕</p>
+        </div>
+
+        <!-- Music Player (Click to Play) -->
+        <div class="music-player">
+            <div class="music-note" onclick="playMusic()">
+                🎵 Click here for our song 🎵
+            </div>
+            <div class="music-warning">(Tap to start the romance soundtrack)</div>
+        </div>
+
+        <!-- Closing -->
+        <div class="closing-note">
+            Happy Valentine's Day, my love.<br>
+            💗 I'm so glad you said yes. 💗
+        </div>
     </div>
 
     <script>
-        // Get the buttons
-        const yesButton = document.getElementById('yesBtn');
-        const noButton = document.getElementById('noBtn');
-        const surpriseDiv = document.getElementById('surpriseMessage');
-
-        // --- The Fun Part: The "No" button runs away! ---
-        noButton.addEventListener('mouseover', function() {
-            // Generate random positions within the window, but keep the button visible
-            const maxX = window.innerWidth - this.offsetWidth - 20;
-            const maxY = window.innerHeight - this.offsetHeight - 20;
-
-            // Make sure the numbers are positive and within bounds
-            const randomX = Math.max(10, Math.min(maxX, Math.random() * maxX));
-            const randomY = Math.max(10, Math.min(maxY, Math.random() * maxY));
-
-            // Apply the new position. 'fixed' makes it move anywhere on screen
-            this.style.position = 'fixed';
-            this.style.left = randomX + 'px';
-            this.style.top = randomY + 'px';
-        });
-
-        // Optional: Also move it if she tries to click it directly
-        noButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Stop any default button action
-            // Move it again on click, just to be safe!
-            const maxX = window.innerWidth - this.offsetWidth - 20;
-            const maxY = window.innerHeight - this.offsetHeight - 20;
-            const randomX = Math.max(10, Math.min(maxX, Math.random() * maxX));
-            const randomY = Math.max(10, Math.min(maxY, Math.random() * maxY));
-            this.style.position = 'fixed';
-            this.style.left = randomX + 'px';
-            this.style.top = randomY + 'px';
-        });
-
-        // --- The Reward: When she clicks "Yes" ---
-        yesButton.addEventListener('click', function() {
-            // 1. Hide the question buttons
-            document.querySelector('.button-container').style.display = 'none';
-            document.querySelector('p[style*="1.5rem"]').style.display = 'none'; // Hide the question text
-
-            // 2. Show the surprise message
-            surpriseDiv.style.display = 'block';
-
-            // 3. CELEBRATE WITH CONFETTI!
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('heartContainer');
+            const symbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💕', '💞', '💗', '💖', '💘', '💝'];
+            
             for (let i = 0; i < 50; i++) {
-                createConfetti();
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                container.appendChild(heart);
+            }
+        }
+        
+        createHearts();
+
+        // Music control
+        const audio = document.getElementById('bgMusic');
+        
+        function playMusic() {
+            audio.play().catch(e => console.log("Playback failed:", e));
+            // Change the button text
+            event.target.innerHTML = '🎵 Playing... 💕';
+        }
+
+        // Auto-play attempt (may be blocked by browsers)
+        window.addEventListener('load', function() {
+            // Try to play (will likely be blocked, but we have the click button as backup)
+            let playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("Auto-play started");
+                }).catch(() => {
+                    console.log("Auto-play blocked, user needs to click");
+                });
             }
         });
 
-        // Function to create confetti pieces
-        function createConfetti() {
-            const colors = ['#ff6f6f', '#f8e0b0', '#ffb6c1', '#a1d6e2', '#ffd966', '#d4af37'];
-
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-
-            // Random styles
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = Math.random() * 15 + 5 + 'px';
-            confetti.style.height = confetti.style.width; // Keep it square/circle
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0'; // Mix of circles and squares
-
-            document.body.appendChild(confetti);
-
-            // Animate falling
-            let position = -10;
-            const speed = Math.random() * 3 + 2;
-            const rotation = Math.random() * 360;
-
-            function fall() {
-                if (position > window.innerHeight) {
-                    confetti.remove();
-                    return;
-                }
-                position += speed;
-                confetti.style.top = position + 'px';
-                confetti.style.transform = `rotate(${rotation + position}deg)`;
-                requestAnimationFrame(fall);
+        // Add some extra romance with confetti when page loads
+        window.addEventListener('load', function() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.color = ['#ff6b6b', '#ffb6b6', '#ffd7d7'][Math.floor(Math.random() * 3)];
+                    confetti.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.innerHTML = ['❤️', '💕', '💗', '🌸', '✨'][Math.floor(Math.random() * 5)];
+                    document.body.appendChild(confetti);
+                    
+                    // Animate falling
+                    let pos = -10;
+                    const fall = setInterval(() => {
+                        if (pos > window.innerHeight + 100) {
+                            clearInterval(fall);
+                            confetti.remove();
+                        } else {
+                            pos += 3;
+                            confetti.style.top = pos + 'px';
+                        }
+                    }, 20);
+                }, i * 100);
             }
-
-            fall();
-        }
+        });
     </script>
 </body>
 </html>
