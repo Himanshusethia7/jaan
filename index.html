@@ -81,37 +81,6 @@
             }
         }
         
-        /* Animated Couple */
-        .animated-couple {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 20;
-            animation: bounce 2.5s ease infinite;
-            cursor: pointer;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px);
-            padding: 15px;
-            border-radius: 60px;
-            border: 2px solid rgba(255,255,255,0.5);
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        
-        .couple-emoji {
-            font-size: 4rem;
-            filter: drop-shadow(0 10px 20px rgba(255,20,147,0.5));
-            transition: all 0.3s ease;
-        }
-        
-        .couple-emoji:hover {
-            transform: scale(1.2) rotate(5deg);
-            filter: drop-shadow(0 15px 30px gold);
-        }
-        
         /* Random Heart Icons */
         .random-hearts {
             position: fixed;
@@ -201,7 +170,7 @@
             text-shadow: 2px 2px 4px rgba(255,20,147,0.3);
         }
         
-        /* Photo Section - REMOVED, REPLACED WITH ROMANTIC QUOTE CAROUSEL */
+        /* Romantic Quote Carousel */
         .romantic-quote-section {
             position: relative;
             width: 100%;
@@ -899,39 +868,75 @@
             line-height: 1.8;
         }
         
-        /* Music Section */
-        .music-section {
+        /* Lyrics Section - REPLACED MUSIC SECTION */
+        .lyrics-section {
             text-align: center;
             margin: 100px 0;
+            padding: 60px;
+            background: rgba(255, 240, 245, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 80px 20px 80px 20px;
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            box-shadow: 0 20px 40px rgba(255,105,180,0.2);
         }
         
-        .music-note {
-            font-size: 5rem;
-            animation: softPulse 2s ease infinite;
-            cursor: pointer;
-            display: inline-block;
-            padding: 40px;
-            border: 2px solid #ffb6c1;
-            border-radius: 50%;
-            width: 220px;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .lyrics-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #b84c4c;
+            margin-bottom: 40px;
+        }
+        
+        .lyrics-content {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            line-height: 2.2;
+            color: #6b4a4a;
+            max-width: 700px;
             margin: 0 auto;
-            transition: all 0.5s ease;
-            background: rgba(255,255,255,0.3);
+            white-space: pre-line;
         }
         
-        .music-note:hover {
-            transform: scale(1.1);
-            background: rgba(255, 182, 193, 0.3);
-            box-shadow: 0 0 50px rgba(255, 105, 180, 0.4);
+        .lyrics-line {
+            margin: 15px 0;
+            opacity: 0;
+            animation: fadeInLine 0.8s ease forwards;
         }
         
-        @keyframes softPulse {
+        .lyrics-line:nth-child(1) { animation-delay: 0.2s; }
+        .lyrics-line:nth-child(2) { animation-delay: 0.4s; }
+        .lyrics-line:nth-child(3) { animation-delay: 0.6s; }
+        .lyrics-line:nth-child(4) { animation-delay: 0.8s; }
+        .lyrics-line:nth-child(5) { animation-delay: 1s; }
+        .lyrics-line:nth-child(6) { animation-delay: 1.2s; }
+        .lyrics-line:nth-child(7) { animation-delay: 1.4s; }
+        .lyrics-line:nth-child(8) { animation-delay: 1.6s; }
+        .lyrics-line:nth-child(9) { animation-delay: 1.8s; }
+        .lyrics-line:nth-child(10) { animation-delay: 2s; }
+        .lyrics-line:nth-child(11) { animation-delay: 2.2s; }
+        .lyrics-line:nth-child(12) { animation-delay: 2.4s; }
+        
+        @keyframes fadeInLine {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .lyrics-heart {
+            font-size: 2.5rem;
+            margin: 30px 0 10px;
+            color: #ff69b4;
+            animation: heartbeat 1.5s ease infinite;
+        }
+        
+        @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.2); }
         }
         
         /* Final Message */
@@ -988,6 +993,7 @@
             .reasons-container { padding: 30px; }
             .reasons-title { font-size: 3rem; }
             .quote-text { font-size: 1.8rem; }
+            .lyrics-content { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -1004,11 +1010,6 @@
             <div class="heart-icon" onclick="changeHeartColor()">💛</div>
             <div class="heart-icon" onclick="changeHeartColor()">💚</div>
             <div class="heart-icon" onclick="changeHeartColor()">💙</div>
-        </div>
-        
-        <!-- Animated Couple -->
-        <div class="animated-couple">
-            <div class="couple-emoji" onclick="changeCouple()" id="coupleEmoji">💑</div>
         </div>
         
         <!-- Main Card -->
@@ -1163,13 +1164,28 @@
                 </div>
             </div>
             
-            <!-- Music Section -->
-            <div class="section" id="musicSection">
-                <div class="music-section">
-                    <div class="music-note" onclick="playMusic()">
-                        🎵
+            <!-- Lyrics Section - REPLACED MUSIC SECTION -->
+            <div class="section" id="lyricsSection">
+                <div class="lyrics-section">
+                    <div class="lyrics-heart">❤️</div>
+                    <h2 class="lyrics-title">A Song for You</h2>
+                    <div class="lyrics-content">
+                        <div class="lyrics-line">You are the sunshine in my darkest days,</div>
+                        <div class="lyrics-line">The melody that sets my heart ablaze.</div>
+                        <div class="lyrics-line">Every moment with you feels like a dream,</div>
+                        <div class="lyrics-line">More beautiful than it may seem.</div>
+                        <div class="lyrics-line"> </div>
+                        <div class="lyrics-line">Your smile lights up the universe for me,</div>
+                        <div class="lyrics-line">In your eyes, my forever I see.</div>
+                        <div class="lyrics-line">No words can capture what I feel inside,</div>
+                        <div class="lyrics-line">With you, my love, I have nothing to hide.</div>
+                        <div class="lyrics-line"> </div>
+                        <div class="lyrics-line">So here's my heart, forever yours to keep,</div>
+                        <div class="lyrics-line">In your love, my soul is complete.</div>
+                        <div class="lyrics-line">DIVSS, MERI JAAN, you're my everything,</div>
+                        <div class="lyrics-line">And for you, my love, I'll forever sing.</div>
                     </div>
-                    <p style="margin-top: 30px; color: #b84c4c;">click for our song</p>
+                    <div class="lyrics-heart">❤️</div>
                 </div>
             </div>
             
@@ -1189,11 +1205,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Hidden Audio - YOUR GOOGLE DRIVE MUSIC LINK ADDED HERE -->
-        <audio id="bgMusic" loop>
-            <source src="https://drive.google.com/uc?export=download&id=1TV4T1YWqEZ9OtVzqSiQ3DlaMvN4E7StG" type="audio/mpeg">
-        </audio>
     </div>
 
     <script>
@@ -1249,44 +1260,6 @@
         function getRandomColor() {
             const colors = ['#ff69b4', '#ff1493', '#ff6b6b', '#ffb6c1', '#ff9a9e', '#fad0c4', '#fbc2c2'];
             return colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        // Change couple emoji
-        const coupleEmoji = document.getElementById('coupleEmoji');
-        const coupleEmojis = ['💑', '👩‍❤️‍👨', '💏', '💕', '💞', '💖', '💗', '💓'];
-        let coupleIndex = 0;
-        
-        function changeCouple() {
-            coupleIndex = (coupleIndex + 1) % coupleEmojis.length;
-            coupleEmoji.innerHTML = coupleEmojis[coupleIndex];
-            createHeartBurst(10);
-        }
-        
-        function createHeartBurst(count) {
-            for (let i = 0; i < count; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.style.position = 'fixed';
-                    heart.style.left = '50%';
-                    heart.style.top = '50%';
-                    heart.style.fontSize = (Math.random() * 3 + 2) + 'rem';
-                    heart.style.zIndex = '9999';
-                    heart.style.pointerEvents = 'none';
-                    heart.style.animation = 'floatUp 2s ease-out forwards';
-                    heart.style.color = getRandomColor();
-                    heart.innerHTML = ['❤️', '💖', '💗', '💕', '💞', '💘'][Math.floor(Math.random() * 6)];
-                    
-                    const angle = Math.random() * 360;
-                    const distance = 150;
-                    const x = Math.cos(angle) * distance;
-                    const y = Math.sin(angle) * distance;
-                    
-                    heart.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-                    
-                    document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), 2000);
-                }, i * 50);
-            }
         }
         
         // =============================================
@@ -1574,12 +1547,6 @@
             
             sections.forEach(section => observer.observe(section));
         }
-        
-        const audio = document.getElementById('bgMusic');
-        window.playMusic = function() {
-            audio.play();
-            document.querySelector('.music-note').innerHTML = '♪♫•*¨*•.¸¸❤️';
-        };
         
         function createCelebration() {
             for (let i = 0; i < 100; i++) {
