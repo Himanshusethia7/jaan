@@ -3,248 +3,776 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You 💖</title>
+    <title>💖 For My Favorite Person 💖</title>
     <style>
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;600&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif; /* Fun font */
-            background: linear-gradient(135deg, #fbc2c2, #f8e0b0); /* Soft pink to peach */
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(-45deg, #ffcdd2, #f8bbd0, #ffccbc, #ffe0b2);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            overflow: hidden; /* Prevents scrollbars from confetti */
             position: relative;
+            overflow-x: hidden;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Hearts Container */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: float 6s ease-in infinite;
+            color: #ff4081;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animated Couple Container */
+        .couple-animation {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 15;
+            animation: bounce 3s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .couple-emoji {
+            font-size: 5rem;
+            filter: drop-shadow(0 10px 15px rgba(255,64,129,0.3));
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .couple-emoji:hover {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 15px 20px rgba(255,64,129,0.5));
+        }
+
+        .couple-tooltip {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            white-space: nowrap;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            border: 2px solid #ff4081;
+            color: #ff4081;
+            font-weight: bold;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .couple-animation:hover .couple-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Random Heart Photo Gallery */
+        .random-hearts {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 15;
+            display: flex;
+            gap: 10px;
+            animation: slideInLeft 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .heart-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(255,64,129,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: heartPulse 2s ease infinite;
+        }
+
+        .heart-icon:nth-child(2) { animation-delay: 0.3s; }
+        .heart-icon:nth-child(3) { animation-delay: 0.6s; }
+        .heart-icon:nth-child(4) { animation-delay: 0.9s; }
+        .heart-icon:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.3) rotate(10deg);
+            background: #ff4081;
+            color: white;
+        }
+
+        /* Main Container */
         .container {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(5px);
-            padding: 2rem 3rem;
-            border-radius: 50px 20px 50px 20px; /* Wacky border */
-            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
-            border: 5px solid white;
-            max-width: 600px;
-            margin: 20px;
+            position: relative;
             z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 3rem 4rem;
+            border-radius: 70px 30px 70px 30px;
+            box-shadow: 0 30px 50px rgba(255, 64, 129, 0.3), 0 0 0 5px rgba(255,255,255,0.5);
+            border: 3px solid white;
+            text-align: center;
+            max-width: 700px;
+            margin: 20px;
+            animation: containerFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-5px) rotate(0.5deg); }
+            75% { transform: translateY(5px) rotate(-0.5deg); }
         }
 
         h1 {
-            font-size: 3rem;
-            color: #d43f3f;
-            text-shadow: 3px 3px 0 #ffe082;
-            margin-bottom: 0.5rem;
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            color: #ff1744;
+            text-shadow: 4px 4px 0 #ffb3c6, 6px 6px 0 rgba(255,105,180,0.3);
+            margin-bottom: 1rem;
+            animation: titlePop 2s ease;
+        }
+
+        @keyframes titlePop {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .subtitle {
-            font-size: 1.5rem;
-            color: #6a4e4e;
+            font-size: 2rem;
+            color: #c51162;
             margin-bottom: 2rem;
+            font-weight: 300;
+            animation: fadeIn 2s ease 0.5s both;
+        }
+
+        /* Photo Frame with Heart Overlay */
+        .photo-section {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            cursor: pointer;
         }
 
         .photo-frame {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 20px auto;
-            border: 8px solid white;
-            border-radius: 50%; /* Circle frame */
+            width: 100%;
+            height: 100%;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            background-color: #ffe0e0;
+            border: 6px solid white;
+            box-shadow: 0 20px 30px rgba(255,64,129,0.4);
+            animation: borderRotate 10s linear infinite;
+        }
+
+        @keyframes borderRotate {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            25% { border-radius: 60% 40% 30% 70% / 50% 40% 60% 50%; }
+            50% { border-radius: 30% 60% 40% 70% / 60% 30% 70% 40%; }
+            75% { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
+            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
         }
 
         .photo-frame img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Makes the image fit the circle */
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Floating Hearts Over Photo */
+        .floating-hearts-overlay {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            pointer-events: none;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-heart-small {
+            position: absolute;
+            font-size: 2rem;
+            animation: heartFloat 3s ease infinite;
+        }
+
+        .floating-heart-small:nth-child(1) { top: 0; left: 0; animation-delay: 0s; }
+        .floating-heart-small:nth-child(2) { top: 0; right: 0; animation-delay: 0.5s; }
+        .floating-heart-small:nth-child(3) { bottom: 0; left: 0; animation-delay: 1s; }
+        .floating-heart-small:nth-child(4) { bottom: 0; right: 0; animation-delay: 1.5s; }
+        .floating-heart-small:nth-child(5) { top: 50%; left: -20px; animation-delay: 2s; }
+        .floating-heart-small:nth-child(6) { top: 50%; right: -20px; animation-delay: 2.5s; }
+
+        @keyframes heartFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+
+        .question-text {
+            font-size: 2.2rem;
+            color: #d81b60;
+            margin: 30px 0;
+            font-weight: bold;
+            animation: glow 2s ease infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #ff80ab; }
+            50% { text-shadow: 0 0 20px #ff4081, 0 0 30px #f50057; }
         }
 
         .button-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin: 30px 0 20px;
+            gap: 40px;
+            margin: 40px 0;
             flex-wrap: wrap;
         }
 
         .btn {
-            font-size: 2rem;
-            padding: 15px 40px;
+            font-size: 2.5rem;
+            padding: 15px 60px;
             border: none;
-            border-radius: 50px; /* Pill shape */
+            border-radius: 60px;
+            font-family: 'Pacifico', cursive;
             cursor: pointer;
-            font-family: inherit;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 0 #bb8f8f;
-            border: 2px solid white;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 0 rgba(0,0,0,0.2);
+            border: 4px solid white;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-yes {
-            background-color: #ff6f6f;
+            background: linear-gradient(45deg, #ff1744, #f50057);
             color: white;
+            animation: yesPulse 2s ease infinite;
+        }
+
+        @keyframes yesPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .btn-yes:hover {
-            background-color: #ff5252;
-            transform: scale(1.1);
-            box-shadow: 0 8px 0 #a15b5b;
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 0 #b2103a;
         }
 
         .btn-no {
-            background-color: #a8a8a8;
+            background: linear-gradient(45deg, #9e9e9e, #757575);
             color: white;
-            position: relative; /* Important for the moving button */
+            position: relative;
         }
 
-        /* The Surprise Message (hidden initially) */
+        .btn-no:hover {
+            background: linear-gradient(45deg, #b0b0b0, #8a8a8a);
+        }
+
+        /* Surprise Message */
         .surprise-message {
             display: none;
-            font-size: 2.5rem;
-            color: #b34141;
-            animation: pop 0.5s ease;
-            margin-top: 20px;
+            font-size: 3rem;
+            color: #ff1744;
+            animation: celebration 1s ease infinite;
+            margin-top: 30px;
         }
 
-        @keyframes pop {
-            0% { transform: scale(0); }
-            80% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        @keyframes celebration {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 20px #ff4081; }
+            50% { transform: scale(1.1); text-shadow: 0 0 40px #f50057, 0 0 60px #ff1744; }
         }
 
-        /* Simple confetti pieces */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f0f;
-            opacity: 0.7;
-            top: -10px;
-            border-radius: 50%;
-            z-index: 5;
+        .footer {
+            margin-top: 30px;
+            color: #ad1457;
+            font-size: 1.2rem;
+            animation: fadeIn 3s ease;
         }
 
-        footer {
-            margin-top: 20px;
-            color: #6b4f4f;
-            font-size: 1rem;
+        /* Loading Hearts Animation */
+        .loading-hearts {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 15;
+        }
+
+        .loading-heart {
+            font-size: 1.5rem;
+            animation: loadingPulse 1.5s ease infinite;
+        }
+
+        .loading-heart:nth-child(2) { animation-delay: 0.2s; }
+        .loading-heart:nth-child(3) { animation-delay: 0.4s; }
+        .loading-heart:nth-child(4) { animation-delay: 0.6s; }
+        .loading-heart:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes loadingPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; color: #ff1744; }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
 
+    <!-- Random Heart Icons (Top Left) -->
+    <div class="random-hearts">
+        <div class="heart-icon" onclick="changeHeartColor()">❤️</div>
+        <div class="heart-icon" onclick="changeHeartColor()">🧡</div>
+        <div class="heart-icon" onclick="changeHeartColor()">💛</div>
+        <div class="heart-icon" onclick="changeHeartColor()">💚</div>
+        <div class="heart-icon" onclick="changeHeartColor()">💙</div>
+    </div>
+
+    <!-- Loading/Animated Hearts (Bottom Left) -->
+    <div class="loading-hearts">
+        <span class="loading-heart">❤️</span>
+        <span class="loading-heart">🧡</span>
+        <span class="loading-heart">💛</span>
+        <span class="loading-heart">💚</span>
+        <span class="loading-heart">💙</span>
+        <span class="loading-heart">💜</span>
+    </div>
+
+    <!-- Animated Couple (Bottom Right) -->
+    <div class="couple-animation">
+        <div class="couple-emoji" onclick="changeCouple()" id="coupleEmoji">💑</div>
+        <div class="couple-tooltip" id="coupleTooltip">Click me! 💕</div>
+    </div>
+
+    <!-- Main Content -->
     <div class="container">
-        <h1>💘 Hey Cutie! 💘</h1>
-        <p class="subtitle">(Yeah, you. The one reading this.)</p>
+        <h1>💖 Hey Beautiful! 💖</h1>
+        <p class="subtitle">(The universe made you just for me)</p>
 
-        <!-- Photo of you two! Replace the image link below -->
-        <div class="photo-frame">
-            <!-- IMPORTANT: REPLACE THIS WITH YOUR PHOTO URL -->
-            <img src="https://photos.app.goo.gl/m7syfTwCUxiRjRW78">
-            <!-- Hint: Upload a photo to imgur.com and paste the link here -->
+        <!-- Photo Section with Floating Hearts -->
+        <div class="photo-section">
+            <div class="photo-frame">
+                <!-- REPLACE THIS WITH YOUR PHOTO URL -->
+                <img src="https://via.placeholder.com/400x400/ffb6c1/ff69b4?text=Your+Photo+Here" alt="Our special moment" id="mainPhoto">
+            </div>
+            <div class="floating-hearts-overlay">
+                <span class="floating-heart-small">❤️</span>
+                <span class="floating-heart-small">💖</span>
+                <span class="floating-heart-small">💗</span>
+                <span class="floating-heart-small">💓</span>
+                <span class="floating-heart-small">💕</span>
+                <span class="floating-heart-small">💞</span>
+            </div>
         </div>
 
-        <p style="font-size: 1.5rem; margin: 20px 0;">I have a very important question...</p>
+        <!-- Click to change photo text -->
+        <p style="font-size: 1rem; color: #c2185b; margin-top: -15px; margin-bottom: 20px;">
+            👆 Click the photo to see my favorite picture of you! 👆
+        </p>
+
+        <div class="question-text">
+            Will you be my Valentine? 🥺👉👈
+        </div>
 
         <div class="button-container">
-            <button class="btn btn-yes" id="yesBtn">Yes 💖</button>
-            <button class="btn btn-no" id="noBtn">No 🙅‍♀️</button>
+            <button class="btn btn-yes" id="yesBtn">YES! 💖</button>
+            <button class="btn btn-no" id="noBtn">No 😢</button>
         </div>
 
         <div id="surpriseMessage" class="surprise-message">
-            🎉 YAY! I knew it! 🎉 <br>
-            <span style="font-size: 1.5rem;">(You just made my whole day!)</span>
+            🎉 I KNEW IT! 🎉<br>
+            <span style="font-size: 2rem;">You just made my whole year! 💕</span>
         </div>
 
-        <footer>made with ❤️ (and a little bit of mischief) just for you</footer>
+        <div class="footer">
+            made with 💖, ✨ magic, and infinite smiles for you
+        </div>
     </div>
 
     <script>
-        // Get the buttons
+        // =============================================
+        // 1. CREATE FLOATING HEARTS BACKGROUND
+        // =============================================
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartSymbols = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💕', '💞', '💗', '💖', '💘', '💝', '❤️‍🔥', '💟'];
+            
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                container.appendChild(heart);
+            }
+        }
+        createFloatingHearts();
+
+        // =============================================
+        // 2. PHOTO CLICK - CHANGE TO RANDOM HEART PHOTO
+        // =============================================
+        const mainPhoto = document.getElementById('mainPhoto');
+        
+        // Array of cute heart photos and couple photos (replace with your own!)
+        const heartPhotos = [
+            'https://via.placeholder.com/400x400/ff6b6b/ffffff?text=❤️',
+            'https://via.placeholder.com/400x400/ffb6c1/ffffff?text=💖',
+            'https://via.placeholder.com/400x400/ff69b4/ffffff?text=💗',
+            'https://via.placeholder.com/400x400/ff1744/ffffff?text=💘',
+            'https://via.placeholder.com/400x400/ff4081/ffffff?text=💝',
+            'https://via.placeholder.com/400x400/f50057/ffffff?text=💕',
+            'https://via.placeholder.com/400x400/c51162/ffffff?text=💞',
+            'https://via.placeholder.com/400x400/ad1457/ffffff?text=💓',
+            // Add some couple silhouettes
+            'https://via.placeholder.com/400x400/ff80ab/ffffff?text=💑',
+            'https://via.placeholder.com/400x400/ff5e7d/ffffff?text=👩‍❤️‍👨',
+            'https://via.placeholder.com/400x400/f06292/ffffff?text=💏'
+        ];
+
+        mainPhoto.addEventListener('click', function() {
+            // Change to random heart photo
+            const randomIndex = Math.floor(Math.random() * heartPhotos.length);
+            this.src = heartPhotos[randomIndex];
+            
+            // Add a little animation
+            this.style.transform = 'scale(1.2) rotate(5deg)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+            
+            // Create a burst of hearts
+            createHeartBurst();
+        });
+
+        function createHeartBurst() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const burstHeart = document.createElement('div');
+                    burstHeart.style.position = 'fixed';
+                    burstHeart.style.left = '50%';
+                    burstHeart.style.top = '50%';
+                    burstHeart.style.fontSize = '3rem';
+                    burstHeart.style.zIndex = '9999';
+                    burstHeart.style.pointerEvents = 'none';
+                    burstHeart.style.animation = 'float 2s ease-out forwards';
+                    burstHeart.innerHTML = ['❤️', '💖', '💗', '💕', '💞'][Math.floor(Math.random() * 5)];
+                    
+                    // Random direction
+                    const angle = Math.random() * 360;
+                    const distance = 200;
+                    const x = Math.cos(angle) * distance;
+                    const y = Math.sin(angle) * distance;
+                    
+                    burstHeart.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+                    
+                    document.body.appendChild(burstHeart);
+                    
+                    setTimeout(() => burstHeart.remove(), 2000);
+                }, i * 50);
+            }
+        }
+
+        // =============================================
+        // 3. CHANGE HEART COLORS WHEN CLICKED
+        // =============================================
+        function changeHeartColor() {
+            const hearts = document.querySelectorAll('.heart');
+            hearts.forEach(heart => {
+                heart.style.color = getRandomColor();
+            });
+        }
+
+        function getRandomColor() {
+            const colors = ['#ff1744', '#f50057', '#c51162', '#ff4081', '#ff80ab', '#ff5e7d', '#d81b60'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // =============================================
+        // 4. CHANGE COUPLE ANIMATION
+        // =============================================
+        const coupleEmoji = document.getElementById('coupleEmoji');
+        const coupleTooltip = document.getElementById('coupleTooltip');
+        
+        const coupleEmojis = ['💑', '👩‍❤️‍👨', '💏', '👨‍❤️‍👨', '👩‍❤️‍👩', '💕', '💞', '💖'];
+        const coupleMessages = [
+            'Us! 💑',
+            'Forever us! 👩‍❤️‍👨',
+            'Me + You 💏',
+            'Perfect together!',
+            'Soulmates! 💕',
+            'Made for each other!',
+            'My favorite people!'
+        ];
+
+        function changeCouple() {
+            const randomIndex = Math.floor(Math.random() * coupleEmojis.length);
+            coupleEmoji.innerHTML = coupleEmojis[randomIndex];
+            coupleTooltip.innerHTML = coupleMessages[randomIndex % coupleMessages.length];
+            
+            // Create heart burst
+            createHeartBurst();
+        }
+
+        // =============================================
+        // 5. THE RUNAWAY NO BUTTON
+        // =============================================
         const yesButton = document.getElementById('yesBtn');
         const noButton = document.getElementById('noBtn');
         const surpriseDiv = document.getElementById('surpriseMessage');
+        const questionText = document.querySelector('.question-text');
+        const buttonContainer = document.querySelector('.button-container');
 
-        // --- The Fun Part: The "No" button runs away! ---
+        // No button runs away
         noButton.addEventListener('mouseover', function() {
-            // Generate random positions within the window, but keep the button visible
-            const maxX = window.innerWidth - this.offsetWidth - 20;
-            const maxY = window.innerHeight - this.offsetHeight - 20;
-
-            // Make sure the numbers are positive and within bounds
-            const randomX = Math.max(10, Math.min(maxX, Math.random() * maxX));
-            const randomY = Math.max(10, Math.min(maxY, Math.random() * maxY));
-
-            // Apply the new position. 'fixed' makes it move anywhere on screen
+            const maxX = window.innerWidth - this.offsetWidth - 100;
+            const maxY = window.innerHeight - this.offsetHeight - 100;
+            
+            const randomX = Math.max(50, Math.min(maxX, Math.random() * maxX));
+            const randomY = Math.max(50, Math.min(maxY, Math.random() * maxY));
+            
             this.style.position = 'fixed';
             this.style.left = randomX + 'px';
             this.style.top = randomY + 'px';
+            this.style.zIndex = '1000';
+            
+            // Change text teasingly
+            const messages = ['🙅‍♀️ Nope!', '😜 Too slow!', '🤭 Can\'t catch me!', '😘 Try again!', '💖 Not today!'];
+            this.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Create a little heart where the button was
+            createMiniHeart(randomX, randomY);
         });
 
-        // Optional: Also move it if she tries to click it directly
-        noButton.addEventListener('click', function(event) {
-            event.preventDefault(); // Stop any default button action
-            // Move it again on click, just to be safe!
-            const maxX = window.innerWidth - this.offsetWidth - 20;
-            const maxY = window.innerHeight - this.offsetHeight - 20;
-            const randomX = Math.max(10, Math.min(maxX, Math.random() * maxX));
-            const randomY = Math.max(10, Math.min(maxY, Math.random() * maxY));
-            this.style.position = 'fixed';
-            this.style.left = randomX + 'px';
-            this.style.top = randomY + 'px';
-        });
-
-        // --- The Reward: When she clicks "Yes" ---
-        yesButton.addEventListener('click', function() {
-            // 1. Hide the question buttons
-            document.querySelector('.button-container').style.display = 'none';
-            document.querySelector('p[style*="1.5rem"]').style.display = 'none'; // Hide the question text
-
-            // 2. Show the surprise message
-            surpriseDiv.style.display = 'block';
-
-            // 3. CELEBRATE WITH CONFETTI!
-            for (let i = 0; i < 50; i++) {
-                createConfetti();
-            }
-        });
-
-        // Function to create confetti pieces
-        function createConfetti() {
-            const colors = ['#ff6f6f', '#f8e0b0', '#ffb6c1', '#a1d6e2', '#ffd966', '#d4af37'];
-
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-
-            // Random styles
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.width = Math.random() * 15 + 5 + 'px';
-            confetti.style.height = confetti.style.width; // Keep it square/circle
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0'; // Mix of circles and squares
-
-            document.body.appendChild(confetti);
-
-            // Animate falling
-            let position = -10;
-            const speed = Math.random() * 3 + 2;
-            const rotation = Math.random() * 360;
-
-            function fall() {
-                if (position > window.innerHeight) {
-                    confetti.remove();
-                    return;
-                }
-                position += speed;
-                confetti.style.top = position + 'px';
-                confetti.style.transform = `rotate(${rotation + position}deg)`;
-                requestAnimationFrame(fall);
-            }
-
-            fall();
+        function createMiniHeart(x, y) {
+            const miniHeart = document.createElement('div');
+            miniHeart.style.position = 'fixed';
+            miniHeart.style.left = x + 'px';
+            miniHeart.style.top = y + 'px';
+            miniHeart.style.fontSize = '2rem';
+            miniHeart.style.pointerEvents = 'none';
+            miniHeart.style.animation = 'float 1s ease-out forwards';
+            miniHeart.innerHTML = ['❤️', '💖', '💕'][Math.floor(Math.random() * 3)];
+            document.body.appendChild(miniHeart);
+            setTimeout(() => miniHeart.remove(), 1000);
         }
+
+        noButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Move it again
+            const maxX = window.innerWidth - this.offsetWidth - 100;
+            const maxY = window.innerHeight - this.offsetHeight - 100;
+            const randomX = Math.max(50, Math.min(maxX, Math.random() * maxX));
+            const randomY = Math.max(50, Math.min(maxY, Math.random() * maxY));
+            
+            this.style.position = 'fixed';
+            this.style.left = randomX + 'px';
+            this.style.top = randomY + 'px';
+            this.innerHTML = '😝 Missed me!';
+        });
+
+        noButton.addEventListener('mouseleave', function() {
+            setTimeout(() => {
+                if (this.innerHTML !== 'No 😢') {
+                    this.innerHTML = 'No 😢';
+                }
+            }, 1000);
+        });
+
+        // =============================================
+        // 6. YES BUTTON CELEBRATION
+        // =============================================
+        yesButton.addEventListener('click', function() {
+            // Hide buttons and question
+            buttonContainer.style.display = 'none';
+            questionText.style.display = 'none';
+            
+            // Show surprise message
+            surpriseDiv.style.display = 'block';
+            
+            // MASSIVE CELEBRATION!
+            celebrate();
+            
+            // Change couple emoji to celebrate
+            coupleEmoji.innerHTML = '🎉';
+            coupleTooltip.innerHTML = 'WE DID IT! 🎉';
+            
+            // Change all hearts to gold
+            document.querySelectorAll('.heart').forEach(heart => {
+                heart.style.color = 'gold';
+            });
+        });
+
+        function celebrate() {
+            // Create 100 pieces of confetti/hearts
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    createCelebrationItem();
+                }, i * 20);
+            }
+            
+            // Play celebration sound (concept)
+            console.log('🎵 CELEBRATION TIME! 🎵');
+        }
+
+        function createCelebrationItem() {
+            const colors = ['#ff1744', '#f50057', '#c51162', '#ff4081', '#ff80ab', '#ff5e7d', '#d81b60', 'gold', 'white'];
+            const symbols = ['❤️', '💖', '💗', '💕', '💞', '🎉', '✨', '⭐', '💫', '🌸'];
+            
+            const item = document.createElement('div');
+            item.style.position = 'fixed';
+            item.style.left = Math.random() * 100 + '%';
+            item.style.top = '-10px';
+            item.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            item.style.zIndex = '9999';
+            item.style.pointerEvents = 'none';
+            item.style.animation = `floatDown ${Math.random() * 3 + 2}s linear forwards`;
+            item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            item.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.body.appendChild(item);
+            
+            setTimeout(() => item.remove(), 5000);
+        }
+
+        // Add keyframe animation for celebration items
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes floatDown {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // =============================================
+        // 7. ADD RANDOM HEART PHOTOS TO GALLERY
+        // =============================================
+        // You can click the heart icons to change the main photo too
+        document.querySelectorAll('.heart-icon').forEach((icon, index) => {
+            icon.addEventListener('click', function() {
+                mainPhoto.src = heartPhotos[index % heartPhotos.length];
+                createHeartBurst();
+            });
+        });
+
+        // =============================================
+        // 8. INITIAL ANIMATION - WELCOME HEARTS
+        // =============================================
+        window.addEventListener('load', function() {
+            // Welcome burst
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createCelebrationItem();
+                }, i * 50);
+            }
+        });
+
+        console.log('💖 Website loaded with love! 💖');
     </script>
 </body>
 </html>
