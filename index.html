@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Evening</title>
+    <title>An Question of the Heart</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap');
         
         * {
             margin: 0;
@@ -15,34 +15,26 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #1a0f0f;
-            color: #f5e6e6;
+            background: #0a0808;
+            color: #f0e2e2;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
         }
         
-        /* Elegant Gradient Overlay */
-        .gradient-overlay {
+        /* Cinematic Overlay */
+        .cinematic-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 30% 30%, rgba(180, 70, 70, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 70%, rgba(140, 60, 60, 0.15) 0%, transparent 50%),
-                        linear-gradient(135deg, #2a1a1a 0%, #1f1313 50%, #2a1a1a 100%);
+            background: radial-gradient(ellipse at center, rgba(60, 30, 30, 0.3) 0%, rgba(10, 5, 5, 0.9) 100%);
             z-index: -1;
-            animation: gradientShift 20s ease infinite;
         }
         
-        @keyframes gradientShift {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-        
-        /* Subtle Particle Background */
-        .particles {
+        /* Animated Background Particles */
+        .particle-field {
             position: fixed;
             top: 0;
             left: 0;
@@ -53,10 +45,10 @@
         
         .particle {
             position: absolute;
-            background: rgba(230, 180, 180, 0.15);
+            background: rgba(200, 150, 150, 0.15);
             border-radius: 50%;
             pointer-events: none;
-            animation: floatParticle 15s infinite linear;
+            animation: floatParticle 20s infinite linear;
         }
         
         @keyframes floatParticle {
@@ -65,10 +57,7 @@
                 opacity: 0;
             }
             20% {
-                opacity: 0.5;
-            }
-            80% {
-                opacity: 0.5;
+                opacity: 0.3;
             }
             100% {
                 transform: translateY(-100px) scale(1);
@@ -78,281 +67,158 @@
         
         /* Main Container */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
             position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             z-index: 10;
         }
         
-        /* Elegant Header */
-        .header {
+        /* Elegant Card */
+        .question-card {
+            background: rgba(20, 15, 15, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 150, 150, 0.2);
+            border-radius: 4px;
+            padding: 80px 60px;
+            max-width: 700px;
+            width: 90%;
             text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInDown 1.5s ease;
+            box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(200, 150, 150, 0.1) inset;
+            animation: cardAppear 2s ease;
+            position: relative;
         }
         
-        @keyframes fadeInDown {
+        @keyframes cardAppear {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(50px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
         
-        .header h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 5rem;
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(200, 150, 150, 0.1);
+            pointer-events: none;
+        }
+        
+        /* Decorative Elements */
+        .top-decoration {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .top-decoration span {
+            color: rgba(200, 150, 150, 0.4);
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+        }
+        
+        .bottom-decoration {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .bottom-decoration span {
+            color: rgba(200, 150, 150, 0.4);
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+        }
+        
+        /* Content */
+        .greeting {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: #c9a9a9;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
             font-weight: 400;
-            letter-spacing: 4px;
-            color: #e8c5c5;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            margin-bottom: 15px;
+            color: #f0d5d5;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+        
+        .name-highlight {
+            color: #e0baba;
+            font-weight: 500;
             position: relative;
             display: inline-block;
         }
         
-        .header h1::before,
-        .header h1::after {
+        .name-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e0baba, transparent);
+        }
+        
+        .question-text {
+            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            color: #e8c5c5;
+            margin: 50px 0 60px;
+            position: relative;
+        }
+        
+        .question-text::before,
+        .question-text::after {
             content: '✧';
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #c49a9a;
             opacity: 0.5;
         }
         
-        .header h1::before {
-            left: -50px;
-        }
-        
-        .header h1::after {
-            right: -50px;
-        }
-        
-        .header .subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            font-weight: 300;
-            letter-spacing: 3px;
-            color: #c9a9a9;
-            text-transform: uppercase;
-            border-top: 1px solid rgba(200, 150, 150, 0.3);
-            border-bottom: 1px solid rgba(200, 150, 150, 0.3);
-            padding: 15px 0;
-            display: inline-block;
-        }
-        
-        /* Photo Gallery */
-        .gallery-section {
-            margin: 80px 0;
-            animation: fadeIn 2s ease 0.3s both;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 400;
-            text-align: center;
-            color: #dbb5b5;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        
-        .section-title span {
-            background: rgba(30, 20, 20, 0.8);
-            padding: 0 30px;
-        }
-        
-        .section-title::before {
-            content: '';
-            position: absolute;
+        .question-text::before {
+            left: -30px;
             top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c49a9a, transparent);
-            z-index: -1;
+            transform: translateY(-50%);
         }
         
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 20px;
+        .question-text::after {
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
         }
         
-        .gallery-item {
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
-            aspect-ratio: 3/4;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 40px -10px rgba(180, 100, 100, 0.3);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            padding: 30px 20px 20px;
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
-        }
-        
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
-        
-        .gallery-overlay p {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            color: white;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-        
-        /* Love Letter Section */
-        .love-letter {
-            background: rgba(30, 20, 20, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(200, 150, 150, 0.2);
-            border-radius: 4px;
-            padding: 60px;
-            margin: 80px 0;
-            box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 2s ease 0.6s both;
-            position: relative;
-        }
-        
-        .love-letter::before {
-            content: '“';
-            position: absolute;
-            top: -30px;
-            left: 30px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 8rem;
-            color: rgba(200, 150, 150, 0.2);
-        }
-        
-        .love-letter::after {
-            content: '”';
-            position: absolute;
-            bottom: -80px;
-            right: 30px;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 8rem;
-            color: rgba(200, 150, 150, 0.2);
-        }
-        
-        .love-letter h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
-            font-weight: 400;
-            color: #e0baba;
-            margin-bottom: 30px;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-        
-        .letter-content {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            line-height: 2;
-            color: #d9c2c2;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .letter-content p {
-            margin-bottom: 25px;
-            text-align: justify;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-        }
-        
-        .letter-content p:nth-child(1) { animation-delay: 0.8s; }
-        .letter-content p:nth-child(2) { animation-delay: 1.2s; }
-        .letter-content p:nth-child(3) { animation-delay: 1.6s; }
-        .letter-content p:nth-child(4) { animation-delay: 2s; }
-        .letter-content p:nth-child(5) { animation-delay: 2.4s; }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .signature {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: #e0baba;
-            text-align: right;
-            margin-top: 50px;
-            opacity: 0;
-            animation: fadeIn 1s ease 3s forwards;
-        }
-        
-        /* Question Section */
-        .question-section {
-            text-align: center;
-            margin: 100px 0 60px;
-            animation: fadeIn 2s ease 2.8s both;
-        }
-        
-        .question-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            color: #e0baba;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .elegant-line {
-            width: 100px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c49a9a, transparent);
-            margin: 20px auto;
-        }
-        
+        /* Button Container */
         .button-container {
             display: flex;
             justify-content: center;
             gap: 40px;
+            margin: 50px 0 30px;
             flex-wrap: wrap;
         }
         
@@ -364,11 +230,13 @@
             padding: 18px 50px;
             border: none;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s ease;
             text-transform: uppercase;
             position: relative;
             overflow: hidden;
             min-width: 200px;
+            background: transparent;
+            border: 1px solid;
         }
         
         .btn::before {
@@ -387,22 +255,20 @@
         }
         
         .btn-yes {
-            background: transparent;
+            border-color: #c49a9a;
             color: #e0baba;
-            border: 1px solid #c49a9a;
         }
         
         .btn-yes:hover {
             background: #c49a9a;
-            color: #1a0f0f;
+            color: #0a0808;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px -5px rgba(196, 154, 154, 0.3);
+            box-shadow: 0 15px 30px -10px #c49a9a;
         }
         
         .btn-no {
-            background: transparent;
+            border-color: #4a3a3a;
             color: #7a6a6a;
-            border: 1px solid #4a3a3a;
         }
         
         .btn-no:hover {
@@ -410,96 +276,42 @@
             color: #b5a0a0;
         }
         
-        /* Celebration Message */
-        .celebration-message {
-            display: none;
-            text-align: center;
-            margin: 60px 0;
-            animation: elegantFadeIn 2s ease;
-        }
-        
-        @keyframes elegantFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        .celebration-message h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            color: #e8c5c5;
-            margin-bottom: 20px;
-        }
-        
-        .celebration-message p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            color: #bda7a7;
-            letter-spacing: 2px;
-        }
-        
-        .elegant-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-        }
-        
-        .elegant-divider span {
-            font-size: 1.5rem;
-            color: #c49a9a;
-        }
-        
-        .elegant-divider .line {
-            width: 50px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #c49a9a, transparent);
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 100px;
-            padding: 30px 0;
-            border-top: 1px solid rgba(200, 150, 150, 0.2);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            color: #5f4e4e;
-        }
-        
-        /* Photo Upload Instructions */
-        .photo-note {
-            font-size: 0.9rem;
+        /* Response Messages */
+        .no-response {
+            margin-top: 30px;
+            font-size: 1rem;
             color: #7a6a6a;
-            margin-top: 20px;
             font-style: italic;
+            min-height: 60px;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
         }
         
-        /* Responsive Design */
+        /* Timeless Footer */
+        .timeless {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #4a3a3a;
+            letter-spacing: 2px;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .header h1 {
+            .question-card {
+                padding: 50px 30px;
+            }
+            
+            h1 {
                 font-size: 3rem;
             }
             
-            .header h1::before,
-            .header h1::after {
-                display: none;
-            }
-            
-            .love-letter {
-                padding: 30px;
-            }
-            
             .question-text {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
+            }
+            
+            .question-text::before,
+            .question-text::after {
+                display: none;
             }
             
             .btn {
@@ -510,382 +322,151 @@
     </style>
 </head>
 <body>
-    <div class="gradient-overlay"></div>
+    <div class="cinematic-overlay"></div>
     
-    <!-- Elegant Particles -->
-    <div class="particles" id="particles"></div>
+    <div class="particle-field" id="particleField"></div>
     
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>My Dearest</h1>
-            <div class="subtitle">A Valentine's Evening</div>
-        </div>
-        
-        <!-- Gallery Section with Google Photos Instructions -->
-        <div class="gallery-section">
-            <h2 class="section-title"><span>Our Memories</span></h2>
-            
-            <!-- INSTRUCTIONS FOR GOOGLE PHOTOS -->
-            <div style="text-align: center; margin-bottom: 30px; color: #bda7a7; font-size: 0.9rem; letter-spacing: 1px;">
-                ✦ Replace these with your Google Photos links ✦
+        <div class="question-card">
+            <div class="top-decoration">
+                <span>✧</span>
+                <span>✧</span>
+                <span>✧</span>
             </div>
             
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be populated by JavaScript -->
-            </div>
+            <div class="greeting">For the One Who Holds My Heart</div>
             
-            <div class="photo-note" id="photoInstruction">
-                Click any photo to see it full size
-            </div>
-        </div>
-        
-        <!-- Love Letter -->
-        <div class="love-letter">
-            <h2>A Letter from My Heart</h2>
-            <div class="letter-content" id="loveLetter">
-                <!-- Content populated by JavaScript -->
-            </div>
-        </div>
-        
-        <!-- Question Section -->
-        <div class="question-section" id="questionSection">
+            <h1>
+                <span class="name-highlight" id="herName">[Her Name]</span>
+            </h1>
+            
             <div class="question-text">
                 Will you be my Valentine?
             </div>
-            <div class="elegant-line"></div>
             
             <div class="button-container">
-                <button class="btn btn-yes" id="yesBtn">Yes, Always</button>
-                <button class="btn btn-no" id="noBtn">Perhaps</button>
+                <button class="btn btn-yes" id="yesBtn">Yes, Forever</button>
+                <button class="btn btn-no" id="noBtn">Not Yet</button>
             </div>
-        </div>
-        
-        <!-- Celebration Message (Hidden Initially) -->
-        <div class="celebration-message" id="celebrationMessage">
-            <h2>You've Made Me the Happiest</h2>
-            <div class="elegant-divider">
-                <span class="line"></span>
+            
+            <div class="no-response" id="noResponse"></div>
+            
+            <div class="bottom-decoration">
                 <span>✧</span>
-                <span class="line"></span>
+                <span>✧</span>
+                <span>✧</span>
             </div>
-            <p>February 14th will now be forever ours</p>
-            <p style="margin-top: 30px; font-size: 1rem;">I await the moment I can hold you close</p>
-        </div>
-        
-        <!-- Footer -->
-        <div class="footer">
-            <p>with all my love, always and forever</p>
-            <p style="font-size: 0.8rem; margin-top: 10px;">✧ Valentine's Day ✧</p>
+            
+            <div class="timeless">
+                ✦ a question from the heart ✦
+            </div>
         </div>
     </div>
 
     <script>
-        // =============================================
-        // CREATE ELEGANT PARTICLES
-        // =============================================
+        // Create particles
         function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
+            const field = document.getElementById('particleField');
+            for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 6 + 2 + 'px';
+                particle.style.width = Math.random() * 4 + 1 + 'px';
                 particle.style.height = particle.style.width;
                 particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = Math.random() * 10 + 10 + 's';
-                particlesContainer.appendChild(particle);
+                particle.style.animationDuration = Math.random() * 15 + 10 + 's';
+                field.appendChild(particle);
             }
         }
         createParticles();
 
-        // =============================================
-        // GOOGLE PHOTOS INTEGRATION
-        // =============================================
-        // HOW TO USE GOOGLE PHOTOS:
-        // 1. Go to Google Photos
-        // 2. Find a photo you want to use
-        // 3. Click Share → Create Link
-        // 4. The link will look like: https://photos.app.goo.gl/xxxxxx
-        // 5. Replace the placeholder URLs below with your actual Google Photos links
-        
-        const googlePhotoLinks = [
-            {
-                url: 'https://photos.app.goo.gl/placeholder1', // REPLACE WITH YOUR GOOGLE PHOTOS LINK
-                caption: 'A moment I treasure'
-            },
-            {
-                url: 'https://photos.app.goo.gl/placeholder2', // REPLACE WITH YOUR GOOGLE PHOTOS LINK
-                caption: 'Your smile stays with me'
-            },
-            {
-                url: 'https://photos.app.goo.gl/placeholder3', // REPLACE WITH YOUR GOOGLE PHOTOS LINK
-                caption: 'The day everything changed'
-            },
-            {
-                url: 'https://photos.app.goo.gl/placeholder4', // REPLACE WITH YOUR GOOGLE PHOTOS LINK
-                caption: 'Lost in your eyes'
-            },
-            {
-                url: 'https://photos.app.goo.gl/placeholder5', // REPLACE WITH YOUR GOOGLE PHOTOS LINK
-                caption: 'A perfect moment'
-            },
-            {
-                url: 'https://photos.app.goo.gl/placeholder6', // REPLACE WITH YOUR GOOGLE PHOTOS LINK
-                caption: 'My favorite view'
-            }
-        ];
-        
-        // Since Google Photos links don't directly show images, 
-        // we'll use placeholder images with instructions on how to add real ones
-        // But you can also use direct image links from Google Photos by:
-        // 1. Go to the photo in Google Photos
-        // 2. Right-click on the image and select "Copy image address"
-        // 3. Use that direct link instead
-        
-        // Example of how to use direct Google Photos image links:
-        // https://lh3.googleusercontent.com/pw/AP1GczP... (long string)
-        
-        const demoImages = [
-            'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=500&fit=crop', // Romantic couple silhouette
-            'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=500&fit=crop', // Rose
-            'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=400&h=500&fit=crop', // Candlelight dinner
-            'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=400&h=500&fit=crop', // Heart shape
-            'https://images.unsplash.com/photo-1522673607200-164d1b3ce5a4?w=400&h=500&fit=crop', // Couple walking
-            'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=500&fit=crop'  // Romantic sunset
-        ];
-        
-        // Populate gallery
-        const galleryGrid = document.getElementById('galleryGrid');
-        
-        function populateGallery(useDemo = true) {
-            galleryGrid.innerHTML = '';
-            
-            for (let i = 0; i < 6; i++) {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                
-                const img = document.createElement('img');
-                // If you have direct Google Photos links, replace demoImages with your array
-                img.src = demoImages[i % demoImages.length];
-                img.alt = `Memory ${i + 1}`;
-                
-                const overlay = document.createElement('div');
-                overlay.className = 'gallery-overlay';
-                
-                const caption = document.createElement('p');
-                caption.textContent = googlePhotoLinks[i].caption;
-                
-                overlay.appendChild(caption);
-                galleryItem.appendChild(img);
-                galleryItem.appendChild(overlay);
-                
-                // Add click to view full size
-                galleryItem.addEventListener('click', function() {
-                    window.open(googlePhotoLinks[i].url, '_blank');
-                });
-                
-                galleryGrid.appendChild(galleryItem);
-            }
-            
-            // Update instruction
-            document.getElementById('photoInstruction').innerHTML = 
-                '✧ Click any photo to open in Google Photos ✧<br>' +
-                '<span style="font-size: 0.8rem;">(Replace the placeholder links with your actual Google Photos links)</span>';
-        }
-        
-        populateGallery();
+        // Get her name from URL parameter or use default
+        const urlParams = new URLSearchParams(window.location.search);
+        const herName = urlParams.get('name') || '[Her Name]';
+        document.getElementById('herName').textContent = herName;
 
-        // =============================================
-        // LOVE LETTER CONTENT
-        // =============================================
-        const loveLetter = document.getElementById('loveLetter');
-        
-        // Customize this love letter with your own words
-        const letterHTML = `
-            <p>My Dearest [Her Name],</p>
-            
-            <p>There are moments in life that stop time—fragments of eternity where everything else fades away. The first time I saw you was one of those moments. In a world of chaos, you were a portrait of grace, and I knew, even then, that my life had changed forever.</p>
-            
-            <p>You have a way of making the ordinary extraordinary. The softness in your voice when you speak of things you love, the light in your eyes when you smile, the gentle way you move through the world—these are the details I find myself remembering in quiet moments. You are poetry in motion, and I am simply in awe of you.</p>
-            
-            <p>This Valentine's Day, I wanted to create something that reflects even a fraction of what you mean to me. Every detail, every word, every image is a love letter to you—a small attempt to capture the beauty I see when I think of you.</p>
-            
-            <p>I don't know what the future holds, but I know that I want you in it. I want to be the one who makes you laugh, who holds your hand through difficult days, who celebrates your triumphs, and who reminds you, every single day, how extraordinary you are.</p>
-        `;
-        
-        loveLetter.innerHTML = letterHTML;
-        
-        const signature = document.createElement('div');
-        signature.className = 'signature';
-        signature.textContent = 'Yours always, [Your Name]';
-        loveLetter.appendChild(signature);
-
-        // =============================================
-        // ELEGANT "NO" BUTTON BEHAVIOR
-        // =============================================
-        const yesButton = document.getElementById('yesBtn');
-        const noButton = document.getElementById('noBtn');
-        const questionSection = document.getElementById('questionSection');
-        const celebrationMessage = document.getElementById('celebrationMessage');
-        
-        // Elegant "No" button response (not running away, but subtle)
+        // Elegant "No" button responses
         const noResponses = [
-            "Are you sure?",
-            "Perhaps isn't no...",
-            "Take a moment...",
-            "The heart wants what it wants",
-            "Consider again?",
-            "I'll wait",
-            "My heart hopes..."
+            "Take all the time you need...",
+            "The heart knows what it wants...",
+            "I'll be here, always...",
+            "Every no brings us closer to yes...",
+            "Patience is the companion of wisdom...",
+            "Some stories take time to unfold...",
+            "My heart remains, patiently waiting...",
+            "The best answers are worth waiting for...",
+            "Timing is everything...",
+            "Whenever you're ready..."
         ];
-        
+
+        const noButton = document.getElementById('noBtn');
+        const yesButton = document.getElementById('yesBtn');
+        const noResponse = document.getElementById('noResponse');
         let noClickCount = 0;
-        
+
         noButton.addEventListener('click', function(e) {
             e.preventDefault();
-            noClickCount++;
             
             if (noClickCount < noResponses.length) {
-                // Elegantly change the button text
-                this.textContent = noResponses[noClickCount - 1];
+                noResponse.textContent = noResponses[noClickCount];
+                noResponse.style.opacity = '1';
                 
-                // Subtle animation
-                this.style.transform = 'scale(0.95)';
+                // Gentle animation
+                this.style.transform = 'scale(0.98)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
                 }, 200);
                 
-                // Add a gentle hint
-                if (noClickCount === 3) {
-                    const hint = document.createElement('div');
-                    hint.style.textAlign = 'center';
-                    hint.style.marginTop = '20px';
-                    hint.style.color = '#c49a9a';
-                    hint.style.fontSize = '0.9rem';
-                    hint.style.fontStyle = 'italic';
-                    hint.textContent = '✧ The heart knows what it wants ✧';
-                    
-                    // Remove old hint if exists
-                    const oldHint = document.querySelector('.heart-hint');
-                    if (oldHint) oldHint.remove();
-                    
-                    hint.className = 'heart-hint';
-                    questionSection.appendChild(hint);
+                noClickCount++;
+                
+                // After 5 clicks, show a special message
+                if (noClickCount === 5) {
+                    const extraMessage = document.createElement('div');
+                    extraMessage.style.marginTop = '20px';
+                    extraMessage.style.color = '#c49a9a';
+                    extraMessage.style.fontSize = '0.9rem';
+                    extraMessage.style.fontStyle = 'italic';
+                    extraMessage.textContent = '✧ Your yes would mean everything ✧';
+                    document.querySelector('.button-container').appendChild(extraMessage);
                 }
             } else {
-                // After enough clicks, gently guide to yes
+                // After all responses, gently guide to yes
                 this.style.opacity = '0.5';
                 this.style.cursor = 'default';
                 this.textContent = 'My heart is yours';
+                noResponse.textContent = 'The only answer that matters is yes...';
                 
-                // Highlight the yes button
+                // Highlight yes button
                 yesButton.style.borderColor = '#e0baba';
-                yesButton.style.color = '#e8c5c5';
-                yesButton.style.boxShadow = '0 0 20px rgba(224, 186, 186, 0.3)';
+                yesButton.style.boxShadow = '0 0 30px rgba(224, 186, 186, 0.3)';
+                yesButton.style.transform = 'scale(1.05)';
             }
         });
-        
-        // Hover effect for no button - subtle, not running away
+
+        // Yes button - redirect to overwhelming romantic page
+        yesButton.addEventListener('click', function() {
+            // Create a beautiful transition effect
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 1.5s ease';
+            
+            // Pass her name to the next page
+            setTimeout(() => {
+                window.location.href = `overwhelming-love.html?name=${encodeURIComponent(herName)}`;
+            }, 1500);
+        });
+
+        // Hover effects
         noButton.addEventListener('mouseenter', function() {
             if (noClickCount < noResponses.length) {
                 this.style.borderColor = '#7a6a6a';
                 this.style.backgroundColor = 'rgba(74, 58, 58, 0.1)';
             }
         });
-        
+
         noButton.addEventListener('mouseleave', function() {
             this.style.borderColor = '#4a3a3a';
             this.style.backgroundColor = 'transparent';
         });
-
-        // =============================================
-        // YES BUTTON - ELEGANT CELEBRATION
-        =============================================
-        yesButton.addEventListener('click', function() {
-            // Hide question section
-            questionSection.style.display = 'none';
-            
-            // Show celebration message
-            celebrationMessage.style.display = 'block';
-            
-            // Create elegant floating elements
-            createElegantCelebration();
-            
-            // Change header
-            document.querySelector('.header h1').textContent = 'My Valentine';
-            document.querySelector('.subtitle').textContent = 'You said yes';
-            
-            // Add personal touch
-            const signature = document.querySelector('.signature');
-            if (signature) {
-                signature.style.animation = 'fadeIn 2s ease';
-            }
-        });
-        
-        function createElegantCelebration() {
-            // Create subtle floating elements (not overwhelming)
-            const symbols = ['✧', '❤️', '✿', '♡', '✤', '❀'];
-            
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    const element = document.createElement('div');
-                    element.style.position = 'fixed';
-                    element.style.left = Math.random() * 100 + '%';
-                    element.style.top = '-10px';
-                    element.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
-                    element.style.color = 'rgba(200, 150, 150, ' + (Math.random() * 0.4 + 0.1) + ')';
-                    element.style.pointerEvents = 'none';
-                    element.style.zIndex = '9999';
-                    element.style.fontFamily = 'serif';
-                    element.style.animation = `floatDown ${Math.random() * 4 + 3}s linear forwards`;
-                    element.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-                    
-                    document.body.appendChild(element);
-                    
-                    setTimeout(() => element.remove(), 6000);
-                }, i * 50);
-            }
-        }
-
-        // Add keyframe animation for celebration
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes floatDown {
-                0% {
-                    transform: translateY(0) rotate(0deg);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 0.8;
-                }
-                90% {
-                    opacity: 0.8;
-                }
-                100% {
-                    transform: translateY(100vh) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // =============================================
-        // GOOGLE PHOTOS SETUP INSTRUCTIONS
-        // =============================================
-        console.log('✨ To add your Google Photos:');
-        console.log('1. Open Google Photos');
-        console.log('2. Click on a photo you want to share');
-        console.log('3. Click the share icon → Create link');
-        console.log('4. Copy the link (starts with https://photos.app.goo.gl/)');
-        console.log('5. Replace the placeholder URLs in the googlePhotoLinks array');
-        console.log('');
-        console.log('📸 For direct image links (optional):');
-        console.log('- Right-click on a photo in Google Photos');
-        console.log('- Select "Copy image address"');
-        console.log('- Paste that link in the demoImages array');
-        console.log('');
-        console.log('💖 Make it personal! Replace [Her Name] and [Your Name]');
     </script>
 </body>
 </html>
