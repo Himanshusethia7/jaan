@@ -201,83 +201,92 @@
             text-shadow: 2px 2px 4px rgba(255,20,147,0.3);
         }
         
-        /* Photo Section */
-        .photo-section {
+        /* Photo Section - REMOVED, REPLACED WITH ROMANTIC QUOTE CAROUSEL */
+        .romantic-quote-section {
             position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 40px;
-        }
-        
-        .photo-frame {
             width: 100%;
-            height: 100%;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            overflow: hidden;
-            border: 6px solid white;
-            box-shadow: 0 20px 40px rgba(255,20,147,0.5);
-            animation: borderRotate 12s linear infinite;
-            cursor: pointer;
+            margin: 30px auto 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(255,20,147,0.2);
         }
         
-        @keyframes borderRotate {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-            25% { border-radius: 60% 40% 30% 70% / 50% 40% 60% 50%; }
-            50% { border-radius: 30% 60% 40% 70% / 60% 30% 70% 40%; }
-            75% { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
-            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        .quote-carousel {
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .photo-frame:hover img {
-            transform: scale(1.15);
-        }
-        
-        .floating-hearts-small {
+        .quote-slide {
             position: absolute;
-            top: -40px;
-            left: -40px;
-            right: -40px;
-            bottom: -40px;
+            width: 100%;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease;
+            text-align: center;
             pointer-events: none;
-            animation: spin 25s linear infinite;
         }
         
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .quote-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+            pointer-events: auto;
         }
         
-        .floating-hearts-small span {
-            position: absolute;
-            font-size: 2.5rem;
-            animation: heartFloat 3s ease infinite;
-            filter: drop-shadow(0 0 10px gold);
+        .quote-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: white;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255,20,147,0.3);
         }
         
-        .floating-hearts-small span:nth-child(1) { top: 0; left: 0; animation-delay: 0s; }
-        .floating-hearts-small span:nth-child(2) { top: 0; right: 0; animation-delay: 0.5s; }
-        .floating-hearts-small span:nth-child(3) { bottom: 0; left: 0; animation-delay: 1s; }
-        .floating-hearts-small span:nth-child(4) { bottom: 0; right: 0; animation-delay: 1.5s; }
-        .floating-hearts-small span:nth-child(5) { top: 50%; left: -30px; animation-delay: 2s; }
-        .floating-hearts-small span:nth-child(6) { top: 50%; right: -30px; animation-delay: 2.5s; }
+        .quote-author {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+        }
         
-        @keyframes heartFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(20deg); }
+        .quote-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+            box-shadow: 0 0 20px gold;
+        }
+        
+        .dot:hover {
+            background: rgba(255,255,255,0.8);
+            transform: scale(1.2);
         }
         
         .click-hint {
             font-size: 1rem;
             color: rgba(255,255,255,0.9);
-            margin-top: -30px;
-            margin-bottom: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
             font-style: italic;
             text-shadow: 0 0 10px gold;
         }
@@ -578,60 +587,78 @@
             color: #ff99aa;
         }
         
-        /* Gallery */
-        .cinematic-gallery {
+        /* REPLACED GALLERY WITH ROMANTIC MEMORY LANE */
+        .memory-lane {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
             margin: 50px 0;
+            padding: 20px;
         }
         
-        .gallery-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            aspect-ratio: 3/4;
-            cursor: pointer;
-            box-shadow: 0 20px 30px -10px rgba(184, 76, 76, 0.3);
-            transition: all 0.5s ease;
-            border: 4px solid white;
-        }
-        
-        .gallery-item:hover {
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 30px 40px -10px #ff69b4;
-            z-index: 20;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(255, 182, 193, 0.9));
-            color: #4a2a2a;
-            padding: 40px 20px 20px;
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+        .memory-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 40px 20px 40px 20px;
+            padding: 50px 40px;
             text-align: center;
-            font-weight: 600;
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,182,193,0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .memory-card:hover::before {
+            opacity: 1;
+        }
+        
+        .memory-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 40px -15px #ff69b4;
+            border-color: #ff69b4;
+        }
+        
+        .memory-icon {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            animation: float 3s ease infinite;
+        }
+        
+        .memory-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #b84c4c;
+            margin-bottom: 20px;
+        }
+        
+        .memory-description {
+            font-size: 1.2rem;
+            color: #6b4a4a;
+            line-height: 1.8;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         /* Love Letter */
@@ -947,7 +974,7 @@
         @media (max-width: 1200px) {
             .hero-title { font-size: 5rem; }
             .section-title { font-size: 3rem; }
-            .cinematic-gallery { grid-template-columns: repeat(2, 1fr); }
+            .memory-lane { grid-template-columns: 1fr; }
             .promise-grid { grid-template-columns: repeat(2, 1fr); }
             .section-title::before,
             .section-title::after { display: none; }
@@ -960,11 +987,12 @@
             .card h1 { font-size: 4rem; }
             .question { font-size: 2.5rem; }
             .btn { font-size: 1.8rem; padding: 15px 40px; min-width: 180px; }
-            .cinematic-gallery { grid-template-columns: 1fr; }
+            .memory-lane { grid-template-columns: 1fr; }
             .promise-grid { grid-template-columns: 1fr; }
             .love-letter { padding: 50px 30px; }
             .reasons-container { padding: 30px; }
             .reasons-title { font-size: 3rem; }
+            .quote-text { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -993,22 +1021,46 @@
             <h1>My Beautiful Valentine</h1>
             <div class="subtitle">(The one who makes my heart sing)</div>
             
-            <!-- Photo Section -->
-            <div class="photo-section">
-                <div class="photo-frame" onclick="changePhoto()">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=400&fit=crop" alt="Romantic couple" id="mainPhoto">
+            <!-- REPLACED PHOTO WITH ROMANTIC QUOTE CAROUSEL -->
+            <div class="romantic-quote-section">
+                <div class="quote-carousel" id="quoteCarousel">
+                    <div class="quote-slide active">
+                        <div class="quote-text">"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</div>
+                        <div class="quote-author">— Maya Angelou</div>
+                    </div>
+                    <div class="quote-slide">
+                        <div class="quote-text">"I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more."</div>
+                        <div class="quote-author">— Angelita Lim</div>
+                    </div>
+                    <div class="quote-slide">
+                        <div class="quote-text">"You are the source of my joy, the center of my world and the whole of my heart."</div>
+                        <div class="quote-author">— Unknown</div>
+                    </div>
+                    <div class="quote-slide">
+                        <div class="quote-text">"I love you not only for what you are, but for what I am when I am with you."</div>
+                        <div class="quote-author">— Elizabeth Barrett Browning</div>
+                    </div>
+                    <div class="quote-slide">
+                        <div class="quote-text">"You are my today and all of my tomorrows."</div>
+                        <div class="quote-author">— Leo Christopher</div>
+                    </div>
+                    <div class="quote-slide">
+                        <div class="quote-text">"Every love story is beautiful, but ours is my favorite."</div>
+                        <div class="quote-author">— Unknown</div>
+                    </div>
                 </div>
-                <div class="floating-hearts-small">
-                    <span>❤️</span>
-                    <span>💖</span>
-                    <span>💗</span>
-                    <span>💓</span>
-                    <span>💕</span>
-                    <span>💞</span>
+                
+                <div class="quote-dots" id="quoteDots">
+                    <span class="dot active" onclick="goToQuote(0)"></span>
+                    <span class="dot" onclick="goToQuote(1)"></span>
+                    <span class="dot" onclick="goToQuote(2)"></span>
+                    <span class="dot" onclick="goToQuote(3)"></span>
+                    <span class="dot" onclick="goToQuote(4)"></span>
+                    <span class="dot" onclick="goToQuote(5)"></span>
                 </div>
             </div>
             
-            <div class="click-hint">✨ click the photo for a romantic surprise ✨</div>
+            <div class="click-hint">✨ let these words speak what my heart feels ✨</div>
             
             <div class="question">
                 Will you be my Valentine?
@@ -1046,10 +1098,10 @@
                 </div>
             </div>
             
-            <!-- Gallery Section -->
-            <div class="section" id="gallerySection">
-                <h2 class="section-title">Our Beautiful Story</h2>
-                <div class="cinematic-gallery" id="galleryGrid"></div>
+            <!-- REPLACED GALLERY WITH ROMANTIC MEMORY LANE -->
+            <div class="section" id="memoryLaneSection">
+                <h2 class="section-title">Our Beautiful Journey</h2>
+                <div class="memory-lane" id="memoryLane"></div>
             </div>
             
             <!-- Love Letter -->
@@ -1172,6 +1224,25 @@
         }
         createFloatingHearts();
         
+        // Quote carousel functionality
+        let currentQuote = 0;
+        const quotes = document.querySelectorAll('.quote-slide');
+        const dots = document.querySelectorAll('.dot');
+        
+        window.goToQuote = function(index) {
+            quotes[currentQuote].classList.remove('active');
+            dots[currentQuote].classList.remove('active');
+            currentQuote = index;
+            quotes[currentQuote].classList.add('active');
+            dots[currentQuote].classList.add('active');
+        };
+        
+        // Auto-rotate quotes
+        setInterval(() => {
+            let next = (currentQuote + 1) % quotes.length;
+            goToQuote(next);
+        }, 5000);
+        
         // Change heart colors
         function changeHeartColor() {
             const hearts = document.querySelectorAll('.heart-float');
@@ -1196,25 +1267,6 @@
             createHeartBurst(10);
         }
         
-        // Change photo
-        const mainPhoto = document.getElementById('mainPhoto');
-        const romanticPhotos = [
-            'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1522673607200-164d1b3ce5a4?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1534531173927-aeb928d54385?w=400&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1529333320936-e2193f4e3b32?w=400&h=400&fit=crop'
-        ];
-        
-        function changePhoto() {
-            const randomIndex = Math.floor(Math.random() * romanticPhotos.length);
-            mainPhoto.src = romanticPhotos[randomIndex];
-            createHeartBurst(15);
-        }
-        
         function createHeartBurst(count) {
             for (let i = 0; i < count; i++) {
                 setTimeout(() => {
@@ -1229,7 +1281,6 @@
                     heart.style.color = getRandomColor();
                     heart.innerHTML = ['❤️', '💖', '💗', '💕', '💞', '💘'][Math.floor(Math.random() * 6)];
                     
-                    // Random direction
                     const angle = Math.random() * 360;
                     const distance = 150;
                     const x = Math.cos(angle) * distance;
@@ -1244,7 +1295,7 @@
         }
         
         // =============================================
-        // RUNAWAY NO BUTTON - ACTUALLY RUNS AWAY
+        // RUNAWAY NO BUTTON
         // =============================================
         const noButton = document.getElementById('noBtn');
         const yesButton = document.getElementById('yesBtn');
@@ -1264,32 +1315,24 @@
             "Maybe later! 💕"
         ];
         
-        // Run away on mouse move (this makes it REALLY run away)
         noButton.addEventListener('mousemove', function(e) {
             e.preventDefault();
             
-            // Get mouse position
             const mouseX = e.clientX;
             const mouseY = e.clientY;
             
-            // Get button position
             const buttonRect = this.getBoundingClientRect();
             const buttonX = buttonRect.left + buttonRect.width / 2;
             const buttonY = buttonRect.top + buttonRect.height / 2;
             
-            // Calculate distance
             const distance = Math.sqrt(Math.pow(mouseX - buttonX, 2) + Math.pow(mouseY - buttonY, 2));
             
-            // If mouse is too close (within 200px), run away!
             if (distance < 200) {
-                // Direction away from mouse
                 const angle = Math.atan2(buttonY - mouseY, buttonX - mouseX);
                 
-                // Calculate new position (run away 300px in opposite direction)
                 const newX = buttonX + Math.cos(angle) * 300;
                 const newY = buttonY + Math.sin(angle) * 300;
                 
-                // Keep within viewport
                 const maxX = window.innerWidth - this.offsetWidth - 50;
                 const maxY = window.innerHeight - this.offsetHeight - 50;
                 const minX = 50;
@@ -1298,29 +1341,24 @@
                 const finalX = Math.max(minX, Math.min(maxX, newX - this.offsetWidth / 2));
                 const finalY = Math.max(minY, Math.min(maxY, newY - this.offsetHeight / 2));
                 
-                // Apply new position
                 this.style.position = 'fixed';
                 this.style.left = finalX + 'px';
                 this.style.top = finalY + 'px';
                 this.style.zIndex = '1000';
                 
-                // Change text for fun
                 const messages = ['🏃', '💨', '🎯', '😝', '✨'];
                 this.innerHTML = messages[Math.floor(Math.random() * messages.length)];
                 
-                // Create little heart trail
                 createMiniHeart(finalX, finalY);
             }
         });
         
-        // Click on no button
         noButton.addEventListener('click', function(e) {
             e.preventDefault();
             
             if (noClickCount < noResponses.length) {
                 noResponse.textContent = noResponses[noClickCount];
                 
-                // Move button away on click too
                 const newX = Math.random() * (window.innerWidth - this.offsetWidth - 100) + 50;
                 const newY = Math.random() * (window.innerHeight - this.offsetHeight - 100) + 50;
                 
@@ -1330,7 +1368,6 @@
                 
                 noClickCount++;
             } else {
-                // After too many nos, give up
                 noResponse.textContent = "Okay okay! You win! I can't escape your love! 🥰";
                 this.style.opacity = '0.5';
                 this.style.pointerEvents = 'none';
@@ -1339,7 +1376,6 @@
             }
         });
         
-        // Create heart trail
         function createMiniHeart(x, y) {
             const heart = document.createElement('div');
             heart.style.position = 'fixed';
@@ -1354,7 +1390,6 @@
             setTimeout(() => heart.remove(), 1000);
         }
         
-        // Reset no button text on mouse leave
         noButton.addEventListener('mouseleave', function() {
             setTimeout(() => {
                 if (this.innerHTML !== 'No 😢' && noClickCount < noResponses.length) {
@@ -1363,22 +1398,17 @@
             }, 500);
         });
         
-        // Yes button - transition to page 2
         yesButton.addEventListener('click', function() {
-            // Hide page 1 with fade
             document.getElementById('page1').style.opacity = '0';
             
             setTimeout(() => {
                 document.getElementById('page1').style.display = 'none';
                 document.getElementById('page2').style.display = 'block';
                 
-                // Initialize page 2
                 initPage2();
                 
-                // Scroll to top
                 window.scrollTo(0, 0);
                 
-                // Create overwhelming celebration
                 createCelebration();
             }, 1000);
         });
@@ -1389,7 +1419,7 @@
         
         function initPage2() {
             createWarmParticles();
-            populateGallery();
+            populateMemoryLane();
             populateLoveLetter();
             populateInfiniteReasons();
             observeSections();
@@ -1410,26 +1440,51 @@
             }
         }
         
-        function populateGallery() {
-            const galleryGrid = document.getElementById('galleryGrid');
-            const galleryImages = [
-                { url: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&h=800&fit=crop', caption: 'The moment our eyes met' },
-                { url: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&h=800&fit=crop', caption: 'Your beautiful smile' },
-                { url: 'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=600&h=800&fit=crop', caption: 'Stolen glances' },
-                { url: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5a4?w=600&h=800&fit=crop', caption: 'Walking together' },
-                { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&h=800&fit=crop', caption: 'Sunset dreams' },
-                { url: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&h=800&fit=crop', caption: 'Heart to heart' }
+        function populateMemoryLane() {
+            const memoryLane = document.getElementById('memoryLane');
+            const memories = [
+                {
+                    icon: '✨',
+                    title: 'The Moment We Met',
+                    description: 'When our eyes first met, something magical happened. The world stopped, and my heart knew it had found its home.'
+                },
+                {
+                    icon: '💫',
+                    title: 'Every Conversation',
+                    description: 'Each word we share weaves another thread in the beautiful tapestry of our story.'
+                },
+                {
+                    icon: '🌹',
+                    title: 'Your Smile',
+                    description: 'The most beautiful thing I\'ve ever seen. It lights up my world and makes every day brighter.'
+                },
+                {
+                    icon: '🎵',
+                    title: 'Our Laughter',
+                    description: 'The sweetest melody, the sound I want to hear for the rest of my life.'
+                },
+                {
+                    icon: '🌟',
+                    title: 'Stolen Moments',
+                    description: 'Every glance, every touch, every moment with you is a treasure I hold close to my heart.'
+                },
+                {
+                    icon: '💝',
+                    title: 'This Moment Now',
+                    description: 'Right here, right now, with you saying yes—this is the most beautiful moment of my life.'
+                }
             ];
             
-            galleryGrid.innerHTML = '';
-            galleryImages.forEach((img) => {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                item.innerHTML = `
-                    <img src="${img.url}" alt="Memory">
-                    <div class="gallery-caption">${img.caption}</div>
+            memoryLane.innerHTML = '';
+            memories.forEach(memory => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.innerHTML = `
+                    <div class="memory-icon">${memory.icon}</div>
+                    <div class="memory-title">${memory.title}</div>
+                    <div class="memory-description">${memory.description}</div>
                 `;
-                galleryGrid.appendChild(item);
+                memoryLane.appendChild(card);
             });
         }
         
@@ -1488,7 +1543,6 @@
                 "Your endless patience"
             ];
             
-            // Shuffle and display
             const shuffled = reasons.sort(() => 0.5 - Math.random());
             container.innerHTML = '';
             
@@ -1500,7 +1554,6 @@
                 container.appendChild(bubble);
             });
             
-            // Add more with animation
             setInterval(() => {
                 const newBubble = document.createElement('div');
                 newBubble.className = 'reason-bubble';
@@ -1508,7 +1561,6 @@
                 newBubble.style.animationDelay = '0s';
                 container.appendChild(newBubble);
                 
-                // Remove oldest if too many
                 if (container.children.length > 25) {
                     container.removeChild(container.children[0]);
                 }
@@ -1528,14 +1580,12 @@
             sections.forEach(section => observer.observe(section));
         }
         
-        // Music player
         const audio = document.getElementById('bgMusic');
         window.playMusic = function() {
             audio.play();
             document.querySelector('.music-note').innerHTML = '♪♫•*¨*•.¸¸❤️';
         };
         
-        // Celebration when she says yes
         function createCelebration() {
             for (let i = 0; i < 100; i++) {
                 setTimeout(() => {
@@ -1556,7 +1606,6 @@
             }
         }
         
-        // Add float down animation
         const style = document.createElement('style');
         style.innerHTML = `
             @keyframes floatDown {
